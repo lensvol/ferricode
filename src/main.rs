@@ -349,7 +349,7 @@ mod tests {
     }
 
     #[test]
-    fn test_day_9_simple_programs() {
+    fn test_infinite_memory_through_relative_register_access() {
         let computer = run_program(vec![109, 2000, 204, -34, 99], vec![]);
         assert_eq!(computer.output, vec![0]);
 
@@ -373,5 +373,32 @@ mod tests {
     fn test_quine() {
         let computer = run_program(vec![109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99], vec![]);
         assert_eq!(computer.output, vec![109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99]);
+    }
+
+    #[test]
+    fn test_count_to_10() {
+        let computer = run_program(vec![
+            4, 17, 4, 19, 1001, 17, 1, 17, 8, 17, 18, 16, 1006, 16, 0, 99,
+            -1, 1, 11, 32
+        ], vec![]);
+        assert_eq!(
+            computer.output,
+            vec![1, 32, 2, 32, 3, 32, 4, 32, 5, 32, 6, 32, 7, 32, 8, 32, 9, 32, 10, 32]
+        );
+    }
+
+    #[test]
+    fn test_hello_world() {
+        let computer = run_program(
+            vec![
+                4, 3, 101, 72, 14, 3, 101, 1, 4, 4, 5, 3, 16, 99,
+                29, 7, 0, 3, -67, -12, 87, -8, 3, -6, -8, -67, -23, -10
+            ],
+            vec![]
+        );
+        assert_eq!(
+            computer.output,
+            vec![72, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33, 10]
+        );
     }
 }
