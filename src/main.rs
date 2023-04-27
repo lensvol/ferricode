@@ -127,10 +127,8 @@ struct Computer {
 
 impl Computer {
     fn new(initial_memory: Vec<i32>, input: Vec<i32>) -> Computer {
-        let mut memory = HashMap::new();
-        for (i, value) in initial_memory.into_iter().enumerate() {
-            memory.insert(i, value);
-        }
+        let mut memory = ComputerMemory::new();
+        memory.write_range(0..initial_memory.len(), initial_memory);
 
         Computer {
             memory,
@@ -307,8 +305,10 @@ impl RangeAddressable for ComputerMemory {
             .collect()
     }
 
-    fn write_range(&mut self, _range: Range<usize>, _data: Vec<i32>) {
-        todo!()
+    fn write_range(&mut self, range: Range<usize>, data: Vec<i32>) {
+        for addr in range {
+            self.insert(addr, data[addr]);
+        }
     }
 }
 
