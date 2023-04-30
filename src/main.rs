@@ -1,7 +1,8 @@
+mod opcode;
 mod intcode;
+mod instruction;
+mod memory;
 
-use std::fmt::{Display, Formatter};
-use std::ops::Range;
 use crate::intcode::computer::Computer;
 
 fn main() {
